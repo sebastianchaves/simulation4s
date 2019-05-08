@@ -1,12 +1,16 @@
 package simulacion
 
-case class Node(cores: Int, idleTimes: List[TimeLapse] = Nil) {
+case class Node(cores: Int, idleTimes: List[TimeLapse] = Nil, busyTimes: List[TimeLapse] = Nil) {
 
   def idleTime: Int = idleTimes.map(_.dif).sum
 
   def addIdleTime(idle: TimeLapse): Node = copy(idleTimes = idleTimes :+ idle)
 
-  def status =
+  def addBusyTime(busy: TimeLapse): Node = copy(busyTimes = busyTimes :+ busy)
+
+  def isIdleAt(time: Time): Boolean = busyTimes.exists(_.finish < time.daySeconds)
+
+  def isBusyAt(time: Time): Boolean = busyTimes.exists(_.finish >= time.daySeconds)
 
 }
 
