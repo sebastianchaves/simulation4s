@@ -22,7 +22,7 @@ object Simulation {
           requests
         } else {
 
-          nodes.find(_.idIdle)
+          request =+ AuxiliarRoutines.nextNode(nodes)
 
           IAT(time)
 
@@ -69,5 +69,7 @@ object AuxiliarRoutines {
   def TRBD: Float = (15f + Math.sqrt(225f - 150f * (Random.nextDouble + 4f / 3f))).toFloat
 
   def TRR: Float = Math.sqrt(1500f * Random.nextDouble - 100f).toFloat
+
+  def nextNode(nodes: List[Node]): Node = nodes.minBy(_.busyTimes.sortBy(_.finish))
 
 }

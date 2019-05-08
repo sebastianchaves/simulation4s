@@ -14,8 +14,8 @@ case class Request(status: RequestStatus = RequestStatus.Ok, processed: TimeLaps
 
 object Request {
 
-  def apply(status: RequestStatus): Request =
-    if(Random.nextDouble() <= 0.05) Request(RequestStatus.Canceled) else Request(RequestStatus.Ok)
+  def apply(status: RequestStatus, processed: TimeLapse): Request =
+    if(Random.nextDouble() <= 0.05) Request(RequestStatus.Canceled, processed) else Request(RequestStatus.Ok, processed)
 
 }
 
